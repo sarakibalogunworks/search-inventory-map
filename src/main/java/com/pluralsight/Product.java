@@ -17,7 +17,7 @@ package com.pluralsight;
             return id;
         }
 
-        public String getName() {
+        public Integer getName() {
             return name;
         }
 

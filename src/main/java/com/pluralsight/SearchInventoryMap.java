@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -25,7 +28,7 @@ public class SearchInventoryMap {
             if (matchedProduct == null) {
                 System.out.println("We dont carry that product");
             } else {
-                System.out.println("We carry %s and the price is $%.2f%n",
+                System.out.printf("We carry %s and the price is $%.2f",
                         matchedProduct.getName(), matchedProduct.getPrice());
             }
 
@@ -39,6 +42,30 @@ public class SearchInventoryMap {
 
     }
 
-    private st
+    private static void loadInventory() {
+        try {
+            FileReader fileReader = new FileReader("inventory.csv");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                String[] parts = line.split("\\|");
+
+                int id = Integer.parseInt(parts[0]);
+                String name = parts[1];
+                double price = Double.parseDouble(parts[2]);
+
+                Product product = new Product(id, name, price);
+
+                inventory.put(product.getName(), product);
+
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+        } catch (IOException error) {
+            System.out.println("Error reading inventory file: " + error.getMessage());
+        }
+    }
 
 }
