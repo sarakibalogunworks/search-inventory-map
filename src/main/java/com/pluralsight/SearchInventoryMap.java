@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class SearchInventoryMap {
 
 
-    public static HashMap<Integer, Product> inventory =
-            new HashMap<Integer, Product>();
+    public static HashMap<String, Product> inventory =
+            new HashMap<>();
 
 
     public static void main(String[] args) {
